@@ -6,6 +6,12 @@ __pycache__/
 # C extensions
 *.so
 
+# node
+node_modules
+
+# parcel
+.parcel-cache
+
 # Large data files
 *.csv
 
