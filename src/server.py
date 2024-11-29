@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, Response
+from flask import Flask, jsonify
 from flask_cors import CORS
 import db
 import matplotlib.pyplot as plt
@@ -42,23 +42,21 @@ def get_window(id, time):
     times.reverse()
     is_fraud.reverse()
 
-    # Create the plot
     fig, ax = plt.subplots(figsize=(10, 5))
-    ax.plot(times, amounts, label='Amount over Time', color='blue', marker='o')
+    ax.plot(times, amounts, label='Quantidades ao Longo do Tempo',
+            color='blue', marker='o')
 
-    # Highlight fraudulent points
     fraud_times = [times[i] for i in range(len(is_fraud)) if is_fraud[i]]
     fraud_amounts = [amounts[i] for i in range(len(is_fraud)) if is_fraud[i]]
     ax.scatter(fraud_times, fraud_amounts,
-               color='red', label='Fraud', zorder=5)
+               color='red', label='Fraude', zorder=5)
 
-    ax.set_xlabel('Time')
-    ax.set_ylabel('Amount')
-    ax.set_title('Amount over Time with Fraud Highlights')
+    ax.set_xlabel('Tempo')
+    ax.set_ylabel('Quantidade')
+    ax.set_title('Quantidade de Compras Recentes')
     ax.tick_params(axis='x', labelrotation=45)
     ax.legend()
 
-    # Save the plot to a BytesIO object as SVG
     output = io.BytesIO()
     plt.tight_layout()
     plt.savefig(output, format='svg')
@@ -71,5 +69,3 @@ def get_window(id, time):
         "prediction_array": prediction_array,
         "svg": f"data:image/svg+xml;base64,{svg_base64}"
     })
-
-    # return Response(output.getvalue(), content_type='image/svg+xml')
