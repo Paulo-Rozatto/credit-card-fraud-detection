@@ -1,8 +1,8 @@
 import numpy as np
 import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
-from sklearn.ensemble import RandomForestClassifier
 import json
+import os
 
 import torch
 import torch.nn as nn
@@ -81,14 +81,14 @@ class CreditCardMLP(nn.Module):
         x = self.fc5(x)
         return x
 
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-ann = CreditCardMLP().to(device)
+device = torch.device("cpu")
+ann = CreditCardMLP()#.to(device)
 
-ann.load_state_dict(torch.load('/home/paulo/Projects/credit-card-fraud-detection/models/ann.pth'))
+ann.load_state_dict(torch.load('/home/paulo/Projects/credit-card-fraud-detection/models/ann.pth', map_location=torch.device('cpu')))
 
 def ann_prediction(data):
     data = scaling(data)
-    data = torch.from_numpy(data).to(device)
+    data = torch.from_numpy(data)#.to(device)
     ann.eval()
 
     with torch.no_grad():
