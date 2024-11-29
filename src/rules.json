@@ -1,0 +1,73 @@
+{
+    "rules": [
+      {
+        "conditions": [
+          {"field": "unix_time_0", "operator": "<=", "value": 0.25},
+          {"field": "merch_long_3", "operator": "<=", "value": 0.72},
+          {"field": "merch_lat_1", "operator": ">", "value": 0.27},
+          {"field": "unix_time_2", "operator": ">", "value": 0.83},
+          {"field": "is_fraud_5", "operator": ">", "value": 0.86},
+          {"field": "merch_long_5", "operator": ">", "value": 0.98}
+        ]
+      },
+      {
+        "conditions": [
+          {"field": "unix_time_0", "operator": "<=", "value": 0.25},
+          {"field": "merch_long_3", "operator": ">", "value": 0.72},
+          {"field": "merch_long_5", "operator": "<=", "value": 0.42},
+          {"field": "amt_5", "operator": "<=", "value": 0.38},
+          {"field": "merch_lat_2", "operator": "<=", "value": 0.17},
+          {"field": "merch_lat_8", "operator": "<=", "value": 0.94}
+        ]
+      },
+      {
+        "conditions": [
+          {"field": "unix_time_0", "operator": ">", "value": 0.25},
+          {"field": "unix_time_11", "operator": ">", "value": 1325464704.00},
+          {"field": "amt_2", "operator": ">", "value": 73.90},
+          {"field": "merch_lat_7", "operator": "<=", "value": 40.03},
+          {"field": "merch_long_4", "operator": ">", "value": -90.78},
+          {"field": "amt_0", "operator": "<=", "value": 39.42}
+        ]
+      },
+      {
+        "conditions": [
+          {"field": "is_fraud_7", "operator": "<=", "value": 0.97},
+          {"field": "merch_lat_3", "operator": ">", "value": 0.71},
+          {"field": "is_fraud_7", "operator": "<=", "value": 0.84},
+          {"field": "unix_time_1", "operator": ">", "value": 1325465728.00},
+          {"field": "amt_5", "operator": ">", "value": 72.42},
+          {"field": "merch_long_11", "operator": ">", "value": -86.78}
+        ]
+      },
+      {
+        "conditions": [
+          {"field": "is_fraud_7", "operator": "<=", "value": 0.97},
+          {"field": "merch_lat_3", "operator": ">", "value": 0.71},
+          {"field": "is_fraud_7", "operator": ">", "value": 0.84},
+          {"field": "merch_long_4", "operator": "<=", "value": 0.44},
+          {"field": "amt_9", "operator": "<=", "value": 0.41},
+          {"field": "unix_time_1", "operator": "<=", "value": 0.13}
+        ]
+      },
+      {
+        "conditions": [
+          {"field": "is_fraud_7", "operator": ">", "value": 0.97},
+          {"field": "amt_6", "operator": "<=", "value": 1.00},
+          {"field": "merch_lat_9", "operator": ">", "value": 0.59},
+          {"field": "unix_time_0", "operator": "<=", "value": 0.00},
+          {"field": "amt_7", "operator": ">", "value": 0.88}
+        ]
+      },
+      {
+        "conditions": [
+          {"field": "is_fraud_7", "operator": ">", "value": 0.97},
+          {"field": "amt_6", "operator": ">", "value": 1.00},
+          {"field": "unix_time_4", "operator": "<=", "value": 0.21},
+          {"field": "is_fraud_6", "operator": ">", "value": 0.85},
+          {"field": "unix_time_4", "operator": ">", "value": 0.18}
+        ]
+      }
+    ]
+  }
+  

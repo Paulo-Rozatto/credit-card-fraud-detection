@@ -49,9 +49,6 @@ def transaction_window(trans_num_to_find='413636e759663f264aae1819a4d4f231', tra
         conn = get_connection()
         cursor = conn.cursor()
 
-        print("Start")
-        print(trans_num_to_find)
-
         query = """
             SELECT t.trans_amt, m.merch_lat, m.merch_long, t.trans_unix_time, t.trans_is_fraud 
             FROM transaction t
@@ -119,7 +116,6 @@ def transaction_window(trans_num_to_find='413636e759663f264aae1819a4d4f231', tra
             'unix_time'
         ]
 
-        print(transactions)
         return transactions
 
     finally:
