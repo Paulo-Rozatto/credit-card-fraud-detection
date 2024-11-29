@@ -1,9 +1,12 @@
-import pickle
 import numpy as np
 import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.ensemble import RandomForestClassifier
 import json
+
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
 
 independent_variables = ['amt_0', 'merch_lat_0', 'merch_long_0', 'unix_time_0', 'is_fraud_0',
                          'amt_1', 'merch_lat_1', 'merch_long_1', 'unix_time_1', 'is_fraud_1',
@@ -64,3 +67,30 @@ def rules_prediction(data):
         rules = json.load(file)['rules']
 
     return [evaluate_rule(rule, df) for rule in rules]
+
+class CreditCardMLP(nn.Module):
+    def __init__(self):
+        super(CreditCardMLP, self).__init__()
+        self.fc1 = nn.Linear(64, 128)
+        self.fc2 = nn.Linear(128, 128)
+        self.fc5 = nn.Linear(128, 1)
+
+    def forward(self, x):
+        x = F.relu(self.fc1(x))
+        x = F.relu(self.fc2(x))
+        x = self.fc5(x)
+        return x
+
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+ann = CreditCardMLP().to(device)
+
+ann.load_state_dict(torch.load('/home/paulo/Projects/credit-card-fraud-detection/models/ann.pth'))
+
+def ann_prediction(data):
+    data = scaling(data)
+    data = torch.from_numpy(data).to(device)
+    ann.eval()
+
+    with torch.no_grad():
+        logits = ann(data)
+        return F.sigmoid(logits).item()

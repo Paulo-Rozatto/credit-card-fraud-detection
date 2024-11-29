@@ -6,7 +6,7 @@ import io
 import datetime
 import base64
 
-from utils import rules_prediction
+from utils import rules_prediction, ann_prediction
 
 app = Flask(__name__)
 CORS(app)
@@ -33,6 +33,8 @@ def get_window(id, time):
     entry = entry[:-1]
 
     prediction_array = rules_prediction(entry)
+    prediction_ann = ann_prediction(entry)
+    print(prediction_ann)
 
     amounts = [entry[0] for entry in result]
     times = [datetime.datetime.fromtimestamp(entry[3]) for entry in result]
@@ -67,5 +69,6 @@ def get_window(id, time):
 
     return jsonify({
         "prediction_array": prediction_array,
+        "prediction_ann": prediction_ann,
         "svg": f"data:image/svg+xml;base64,{svg_base64}"
     })

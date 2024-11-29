@@ -3,6 +3,10 @@ async function get_hist(id, unixTime) {
         const response = await fetch(`http://127.0.0.1:5000/window/${id}/${unixTime}`);
         const data = await response.json();
 
+        const ann_pred = document.querySelector("#ann_pred")
+        console.log(data, ann_pred)
+        ann_pred.innerHTML = `${Number(data.prediction_ann).toLocaleString(undefined,{style: 'percent', minimumFractionDigits:2}) }`;
+
         const tableBody = document.querySelector('#rules-table tbody');
         tableBody.innerHTML = '';
 
@@ -46,7 +50,6 @@ try {
             tdId.textContent = id;
 
             const tdDate = document.createElement("td");
-            console.log(unixTime)
             tdDate.textContent = new Date(unixTime * 1110).toLocaleString();
 
             tr.appendChild(tdId);
